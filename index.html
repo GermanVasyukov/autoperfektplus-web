@@ -545,7 +545,6 @@
       gap:12px;
       align-items:stretch;
       overflow:hidden;
-      min-height: 320px;
     }
 
     .video-card{
@@ -555,10 +554,10 @@
       border:1px solid rgba(255,255,255,.16);
       box-shadow: 0 14px 28px rgba(0,0,0,.35);
       background: linear-gradient(140deg, rgba(14,18,26,.95), rgba(8,10,15,.98));
-      min-height: 320px;
-      flex: 1 1 12%;
-      min-width: 88px;
-      transition: flex .28s ease, transform .22s ease, box-shadow .22s ease, border-color .22s ease, opacity .22s ease;
+      aspect-ratio: 16 / 10;
+      flex: 1 1 16%;
+      min-width: 120px;
+      transition: flex .28s ease, box-shadow .22s ease, border-color .22s ease, opacity .22s ease;
     }
 
     .video-gallery:hover .video-card{
@@ -567,7 +566,7 @@
     .video-gallery .video-card:hover{
       flex: 3.6 1 0;
       opacity:1;
-      transform: translateY(-4px);
+      transform:none;
       border-color: rgba(255,210,77,.36);
       box-shadow: 0 22px 40px rgba(0,0,0,.45);
     }
@@ -1189,7 +1188,7 @@
       <div class="video-gallery">
 
   <div class="video-card" data-label="Před → Po • blatník">
-    <video class="gallery-video" muted loop playsinline preload="none">
+    <video class="gallery-video" muted loop playsinline preload="metadata">
       <source data-src="videos/pdr-01.mp4" type="video/mp4">
     </video>
     <div class="hover-hint">Najeď myší</div>
@@ -1197,21 +1196,21 @@
   </div>
 
   <div class="video-card" data-label="Před → Po • dveře">
-    <video class="gallery-video" muted loop playsinline preload="none">
+    <video class="gallery-video" muted loop playsinline preload="metadata">
       <source data-src="videos/pdr-02.mp4" type="video/mp4">
     </video>
     <div class="hover-hint">Najeď myší</div>
     <div class="label">Před → Po • dveře</div>
   </div>
   <div class="video-card" data-label="Před → Po • krupobití">
-    <video class="gallery-video" muted loop playsinline preload="none">
+    <video class="gallery-video" muted loop playsinline preload="metadata">
       <source data-src="videos/pdr-04.mp4" type="video/mp4">
     </video>
     <div class="hover-hint">Najeď myší</div>
     <div class="label">Před → Po • krupobití</div>
   </div>
   <div class="video-card" data-label="Před → Po • blatník">
-    <video class="gallery-video" muted loop playsinline preload="none">
+    <video class="gallery-video" muted loop playsinline preload="metadata">
       <source data-src="videos/pdr-05.mp4" type="video/mp4">
     </video>
     <div class="hover-hint">Najeď myší</div>
@@ -1405,7 +1404,7 @@
       if(e.key === "Escape") closeModal();
     });
 
-    // Galerie videi: nacist a prehrat pri najeti mysi, zastavit po odjeti.
+    // Galerie videi: zdroje pripravit hned, prehrat pri najeti mysi.
     document.querySelectorAll(".gallery-video").forEach((video) => {
       const source = video.querySelector("source[data-src]");
       const ensureLoaded = () => {
@@ -1413,28 +1412,26 @@
         source.src = source.dataset.src;
         video.load();
       };
+      ensureLoaded();
 
       const parentCard = video.closest(".video-card");
       if (!parentCard) return;
+      const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
-      parentCard.addEventListener("mouseenter", () => {
-        ensureLoaded();
-        video.play().catch(() => {});
-      });
+      if (canHover) {
+        parentCard.addEventListener("mouseenter", () => {
+          video.play().catch(() => {});
+        });
 
-      parentCard.addEventListener("mouseleave", () => {
-        video.pause();
-        video.currentTime = 0;
-      });
+        parentCard.addEventListener("mouseleave", () => {
+          video.pause();
+          video.currentTime = 0;
+        });
+      }
 
       // Na dotykovych zarizenich: prvni tap nacte/prehraje video.
       parentCard.addEventListener("click", () => {
-        ensureLoaded();
-        if (video.paused) {
-          video.play().catch(() => {});
-        } else {
-          video.pause();
-        }
+        video.play().catch(() => {});
       });
     });
 
