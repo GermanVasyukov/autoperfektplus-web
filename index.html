@@ -884,7 +884,7 @@
       <div class="grid-3">
         <div class="card service-card">
           <div class="service-media">
-            <img src="images/pdr01.png" alt="Opravy po krupobití" loading="lazy" decoding="async">
+            <img src="images/optimized/pdr01.jpg" alt="Opravy po krupobití" loading="lazy" decoding="async">
           </div>
           <div class="service-body">
             <h3>Opravy po krupobití</h3>
@@ -898,7 +898,7 @@
 
         <div class="card service-card">
           <div class="service-media">
-            <img src="images/pdr02.png" alt="Poškození od dveří na parkovišti" loading="lazy" decoding="async">
+            <img src="images/optimized/pdr02.jpg" alt="Poškození od dveří na parkovišti" loading="lazy" decoding="async">
           </div>
           <div class="service-body">
             <h3>Promáčkliny od dveří na parkovišti</h3>
@@ -912,7 +912,7 @@
 
         <div class="card service-card">
           <div class="service-media">
-            <img src="images/pdr03.png" alt="Opravy po vandalismu" loading="lazy" decoding="async">
+            <img src="images/optimized/pdr03.jpg" alt="Opravy po vandalismu" loading="lazy" decoding="async">
           </div>
           <div class="service-body">
             <h3>Opravy po vandalismu</h3>
@@ -926,7 +926,7 @@
 
         <div class="card service-card">
           <div class="service-media">
-            <img src="images/pdr04.png" alt="Výjezd technika a kalkulace" loading="lazy" decoding="async">
+            <img src="images/optimized/pdr04.jpg" alt="Výjezd technika a kalkulace" loading="lazy" decoding="async">
           </div>
           <div class="service-body">
             <h3>Výjezd technika a kalkulace</h3>
@@ -940,7 +940,7 @@
 
         <div class="card service-card">
           <div class="service-media">
-            <img src="images/pdr05.png" alt="Přijedeme a opravíme na místě" loading="lazy" decoding="async">
+            <img src="images/optimized/pdr05.jpg" alt="Přijedeme a opravíme na místě" loading="lazy" decoding="async">
           </div>
           <div class="service-body">
             <h3>Opravíme to rychle a kvalitně i další den</h3>
@@ -954,7 +954,7 @@
 
         <div class="card service-card">
           <div class="service-media">
-            <img src="images/pdr06.png" alt="Pomoc s dokumentací pro pojišťovnu" loading="lazy" decoding="async">
+            <img src="images/optimized/pdr06.jpg" alt="Pomoc s dokumentací pro pojišťovnu" loading="lazy" decoding="async">
           </div>
           <div class="service-body">
             <h3>Pomůžeme s dokumentací pro pojišťovnu</h3>
@@ -1082,26 +1082,26 @@
       <div class="video-gallery">
 
   <div class="video-card">
-    <video class="lazy-video" autoplay muted loop playsinline preload="none" poster="images/pdr01.png">
+    <video class="lazy-video" controls playsinline preload="none" poster="images/optimized/pdr01.jpg">
       <source data-src="videos/pdr-01.mp4" type="video/mp4">
     </video>
     <div class="label">Před → Po • blatník</div>
   </div>
 
   <div class="video-card">
-    <video class="lazy-video" autoplay muted loop playsinline preload="none" poster="images/pdr02.png">
+    <video class="lazy-video" controls playsinline preload="none" poster="images/optimized/pdr02.jpg">
       <source data-src="videos/pdr-02.mp4" type="video/mp4">
     </video>
     <div class="label">Před → Po • dveře</div>
   </div>
   <div class="video-card">
-    <video class="lazy-video" autoplay muted loop playsinline preload="none" poster="images/pdr04.png">
+    <video class="lazy-video" controls playsinline preload="none" poster="images/optimized/pdr04.jpg">
       <source data-src="videos/pdr-04.mp4" type="video/mp4">
     </video>
     <div class="label">Před → Po • krupobití</div>
   </div>
   <div class="video-card">
-    <video class="lazy-video" autoplay muted loop playsinline preload="none" poster="images/pdr05.png">
+    <video class="lazy-video" controls playsinline preload="none" poster="images/optimized/pdr05.jpg">
       <source data-src="videos/pdr-05.mp4" type="video/mp4">
     </video>
     <div class="label">Před → Po • blatník</div>
@@ -1294,7 +1294,7 @@
       if(e.key === "Escape") closeModal();
     });
 
-    // Lazy load videi v galerii: nactou se az pri priblizeni do viewportu.
+    // Lazy load videi v galerii: nacitaji se az po kliknuti.
     const lazyVideos = document.querySelectorAll("video.lazy-video");
     const loadVideo = (video) => {
       if (video.dataset.loaded === "true") return;
@@ -1304,24 +1304,12 @@
       video.load();
       video.dataset.loaded = "true";
     };
-
-    if ("IntersectionObserver" in window) {
-      const videoObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          const video = entry.target;
-          if (entry.isIntersecting) {
-            loadVideo(video);
-            video.play().catch(() => {});
-          } else {
-            video.pause();
-          }
-        });
-      }, { rootMargin: "260px 0px", threshold: 0.15 });
-
-      lazyVideos.forEach((video) => videoObserver.observe(video));
-    } else {
-      lazyVideos.forEach((video) => loadVideo(video));
-    }
+    lazyVideos.forEach((video) => {
+      video.addEventListener("click", () => {
+        loadVideo(video);
+        video.play().catch(() => {});
+      }, { once: true });
+    });
 
     // Form -> mailto
     document.getElementById("leadForm").addEventListener("submit", (e) => {
