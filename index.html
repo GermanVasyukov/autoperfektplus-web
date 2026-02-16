@@ -1,0 +1,1325 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#05070b" />
+  <title>Auto Perfekt plus | PDR opravy promáčklin bez lakování</title>
+  <meta name="description" content="Auto Perfekt plus – profesionální opravy karoserie metodou PDR (bez lakování). Důlky po krupobití, parkovací promáčkliny, drobné ťukance. Prohlídka a kalkulace zdarma." />
+  <meta name="robots" content="index,follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Auto Perfekt plus | PDR opravy bez lakování" />
+  <meta property="og:description" content="Rychle • Šetrně • Bez lakování. Důlky po krupobití i parkovací promáčkliny. Prohlídka zdarma." />
+  <meta property="og:type" content="website" />
+
+  <style>
+    :root{
+      --bg:#05070b;
+      --panel:#0b0f17;
+      --card: rgba(255,255,255,.04);
+      --text:#eef2ff;
+      --muted:#aeb6cf;
+      --line: rgba(255,255,255,.10);
+
+      --gold1:#ffdf7a;
+      --gold2:#c89a2b;
+      --gold3:#ffd24d;
+
+      --silver1:#f2f5fb;
+      --silver2:#b7beca;
+
+      --ok:#4ade80;
+
+      --shadow: 0 18px 44px rgba(0,0,0,.55);
+      --radius: 18px;
+      --radius2: 28px;
+      --max: 1160px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans";
+      color:var(--text);
+      background:
+        radial-gradient(900px 600px at 20% 10%, rgba(255,210,77,.10), transparent 55%),
+        radial-gradient(900px 600px at 80% 20%, rgba(242,245,251,.10), transparent 55%),
+        radial-gradient(1000px 800px at 60% 90%, rgba(200,154,43,.10), transparent 60%),
+        var(--bg);
+      line-height:1.5;
+      overflow-x:hidden;
+    }
+
+    /* jemné „sparkle“ jako v logu */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background:
+        radial-gradient(1px 1px at 12% 18%, rgba(255,255,255,.20) 50%, transparent 55%),
+        radial-gradient(1px 1px at 72% 22%, rgba(255,255,255,.16) 50%, transparent 55%),
+        radial-gradient(1px 1px at 35% 70%, rgba(255,255,255,.14) 50%, transparent 55%),
+        radial-gradient(1px 1px at 86% 76%, rgba(255,255,255,.18) 50%, transparent 55%),
+        radial-gradient(1px 1px at 22% 44%, rgba(255,210,77,.18) 50%, transparent 55%),
+        radial-gradient(1px 1px at 64% 58%, rgba(255,210,77,.12) 50%, transparent 55%);
+      opacity:.55;
+      mix-blend-mode: screen;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    .container{ max-width:var(--max); margin:0 auto; padding:0 18px; }
+
+    /* Top bar */
+    .topbar .container{ max-width: 1080px; }
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(5,7,11,.72);
+      border-bottom:1px solid var(--line);
+    }
+    .subnav{
+      position:sticky;
+      top:96px;
+      z-index:45;
+      border-bottom:1px solid var(--line);
+      background: rgba(5,7,11,.62);
+      backdrop-filter: blur(8px);
+    }
+    .subnav .container{
+      max-width: 1080px;
+    }
+    .subnav nav{
+      padding:6px 0;
+      justify-content:center;
+    }
+    .subnav nav a{
+      font-size:17px;
+      font-weight:900;
+      letter-spacing:.25px;
+      color: var(--silver1);
+      padding:9px 14px;
+      border:1px solid rgba(255,210,77,.28);
+      background: rgba(255,210,77,.12);
+      box-shadow: 0 8px 20px rgba(200,154,43,.16);
+    }
+    .topbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      padding:6px 0;
+      min-height:96px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      font-weight:900;
+      letter-spacing:.2px;
+      min-width: unset;
+      padding-left:0;
+      flex:1 1 auto;
+      min-width:0;
+    }
+    .brand-logo-cell{
+      height:auto;
+      width:auto;
+      display:flex;
+      align-items:center;
+      flex:0 0 auto;
+    }
+
+    .brand-logo{
+      width:auto;
+      max-width:min(520px, 42vw);
+      height:84px;
+      max-height:84px;
+      display:block;
+      margin-left:0;
+      object-fit:contain;
+      object-position:left center;
+      filter: drop-shadow(0 12px 24px rgba(0,0,0,.55));
+    }
+
+    .brand span{ display:block; }
+    .brand .sub{ font-size:12px; color:var(--muted); font-weight:700; margin-top:-2px; }
+    .brand .brand-text{
+      display:grid;
+      align-content:center;
+      text-align:left;
+      min-width:0;
+    }
+
+    nav{
+      display:flex; align-items:center; gap:10px;
+      flex-wrap:nowrap;
+      justify-content:flex-end;
+      min-width:0;
+    }
+    nav a{
+      color:var(--muted);
+      font-weight:800;
+      font-size:13px;
+      padding:6px 8px;
+      border-radius:12px;
+      transition: all .2s ease;
+    }
+    nav a:hover{ color:var(--text); background: rgba(255,255,255,.06); }
+
+    .nav-cta{
+      display:grid;
+      grid-auto-flow: column;
+      grid-auto-columns: max-content;
+      align-items:center;
+      gap:12px;
+      margin-left:auto;
+      padding-left:28px;
+      flex:0 0 auto;
+    }
+    .nav-cta .btn{ flex:0 0 auto; }
+    .topbar .btn{
+      padding:11px 16px;
+      font-size:14px;
+      border-radius: 12px;
+      white-space: nowrap;
+    }
+
+    .btn{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+      padding:10px 14px;
+      border-radius:14px;
+      font-weight:900;
+      font-size:14px;
+      transition: all .2s ease;
+      display:inline-flex; align-items:center; gap:10px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.10); }
+
+    .btn-primary{
+      border:1px solid rgba(255,210,77,.25);
+      background: linear-gradient(135deg, var(--gold1), var(--gold2));
+      color:#0b0b0b;
+      box-shadow: 0 18px 40px rgba(200,154,43,.22);
+    }
+    .btn-primary:hover{
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+    }
+
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      border:1px solid rgba(255,210,77,.20);
+      background: rgba(255,210,77,.06);
+      color:var(--muted);
+      padding:8px 12px;
+      border-radius:999px;
+      font-weight:800;
+      font-size:13px;
+    }
+
+    /* Hero */
+    .hero{
+      position:relative;
+      overflow:hidden;
+      padding:58px 0 22px;
+    }
+    .hero-video{
+      position:absolute;
+      inset:0;
+      z-index:-2;
+    }
+    .hero-video video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      filter: brightness(.26) contrast(1.10);
+    }
+    .hero-overlay{
+      position:absolute;
+      inset:0;
+      z-index:-1;
+      background: radial-gradient(800px 500px at 30% 20%, rgba(255,210,77,.10), transparent 60%),
+                  linear-gradient(180deg, rgba(5,7,11,.25), rgba(5,7,11,.92));
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.25fr .95fr;
+      gap:22px;
+      align-items:stretch;
+    }
+
+    .hero h1{
+      font-size: clamp(30px, 4vw, 56px);
+      line-height:1.05;
+      margin:14px 0 10px;
+      letter-spacing:-.7px;
+
+      background: linear-gradient(90deg, var(--gold1), var(--silver1), var(--gold3));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color: transparent;
+    }
+
+    .hero p{
+      margin:0;
+      color:var(--muted);
+      font-weight:650;
+      font-size:16px;
+      max-width:56ch;
+    }
+
+    .hero-actions{ margin-top:18px; display:flex; gap:10px; flex-wrap:wrap; }
+    .hero-bullets{ margin-top:18px; display:flex; gap:10px; flex-wrap:wrap; }
+
+    .bullet{
+      display:flex; align-items:center; gap:10px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      padding:10px 12px;
+      border-radius: 14px;
+      color:var(--muted);
+      font-weight:850;
+      font-size:13px;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: var(--ok);
+      box-shadow: 0 0 0 4px rgba(74,222,128,.15);
+    }
+
+    .hero-card{
+      border:1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+      min-height: 340px;
+    }
+    .hero-card::before{
+      content:"";
+      position:absolute; inset:-130px -130px auto auto;
+      width:280px; height:280px;
+      border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,210,77,.28), transparent 60%);
+      filter: blur(2px);
+    }
+    .hero-card::after{
+      content:"";
+      position:absolute; inset:auto auto -150px -150px;
+      width:320px; height:320px;
+      border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, rgba(242,245,251,.18), transparent 60%);
+      filter: blur(2px);
+    }
+    .mini{ position:relative; z-index:2; display:grid; gap:12px; }
+    .mini h3{ margin:0; font-size:18px; letter-spacing:-.2px; }
+    .mini p{ margin:0; color:var(--muted); font-weight:650; font-size:14px; }
+
+    .mini .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      margin-top:6px;
+    }
+    .stat{
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.20);
+      border-radius: 16px;
+      padding:12px;
+    }
+    .stat b{ display:block; font-size:16px; color: var(--silver1); }
+    .stat span{ color:var(--muted); font-weight:750; font-size:12px; }
+
+    .note{
+      border-left:3px solid rgba(255,210,77,.85);
+      padding:10px 12px;
+      border-radius: 14px;
+      background: rgba(255,210,77,.07);
+      border:1px solid rgba(255,210,77,.18);
+    }
+
+    /* Sections */
+    section{
+      position:relative;
+      isolation:isolate;
+      padding:42px 0;
+      --section-tint: rgba(242,245,251,.02);
+      --section-glow: rgba(242,245,251,.05);
+    }
+    section::before{
+      content:"";
+      position:absolute;
+      inset:10px 0;
+      z-index:-1;
+      background: transparent;
+    }
+    section > .container{
+      position:relative;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:24px;
+      padding:24px 22px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.018), rgba(255,255,255,.008)),
+        radial-gradient(900px 260px at 50% 0%, var(--section-glow), transparent 72%),
+        var(--section-tint);
+      box-shadow: 0 12px 28px rgba(0,0,0,.18);
+      overflow:clip;
+    }
+    #sluzby{
+      --section-tint: rgba(242,245,251,.035);
+      --section-glow: rgba(242,245,251,.10);
+    }
+    #pdr{
+      --section-tint: rgba(255,210,77,.028);
+      --section-glow: rgba(255,210,77,.10);
+    }
+    #cenik{
+      --section-tint: rgba(183,190,202,.045);
+      --section-glow: rgba(242,245,251,.11);
+    }
+    #galerie{
+      --section-tint: rgba(255,210,77,.024);
+      --section-glow: rgba(255,210,77,.09);
+    }
+    #faq{
+      --section-tint: rgba(183,190,202,.04);
+      --section-glow: rgba(242,245,251,.095);
+    }
+    #kontakt{
+      --section-tint: rgba(255,210,77,.03);
+      --section-glow: rgba(255,210,77,.11);
+    }
+    .section-title{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:14px; flex-wrap:wrap;
+      margin-bottom:16px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size: clamp(22px, 2.5vw, 34px);
+      letter-spacing:-.4px;
+      line-height:1.1;
+    }
+    .section-title p{
+      margin:0;
+      color:var(--muted);
+      font-weight:650;
+      max-width:70ch;
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    .grid-2{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:14px;
+    }
+    .card{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      border-radius: var(--radius);
+      padding:16px;
+      box-shadow: 0 10px 20px rgba(0,0,0,.22);
+    }
+    .service-card{
+      padding:0;
+      overflow:hidden;
+    }
+    .service-media{
+      width:100%;
+      aspect-ratio: 16 / 9;
+      background:#000;
+      border-bottom:1px solid var(--line);
+    }
+    .service-media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      filter: contrast(1.06) brightness(.94);
+    }
+    .service-body{
+      padding:14px;
+    }
+    .card h3{ margin:0 0 6px; font-size:18px; letter-spacing:-.2px; }
+    .card p{ margin:0; color:var(--muted); font-weight:650; }
+    .tagrow{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    .tag{
+      font-size:12px;
+      font-weight:950;
+      color:#0b0b0b;
+      background: linear-gradient(135deg, var(--gold1), var(--gold2));
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,210,77,.25);
+    }
+    .tag.alt{
+      background: linear-gradient(135deg, var(--silver1), var(--silver2));
+      border-color: rgba(242,245,251,.25);
+    }
+
+    /* Pricing */
+    .pricing{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    .price-table{
+      width:100%;
+      border-collapse:collapse;
+      overflow:hidden;
+      border-radius: 16px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+    }
+    .price-table th, .price-table td{
+      padding:12px 12px;
+      border-bottom:1px solid var(--line);
+      text-align:left;
+      font-weight:800;
+    }
+    .price-table th{ color:var(--muted); font-size:13px; }
+    .price-table td{ color:var(--text); }
+    .price-table tr:last-child td{ border-bottom:none; }
+    .small{ color:var(--muted); font-weight:650; font-size:13px; margin-top:10px; }
+
+    /* Gallery */
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:10px;
+    }
+    .thumb{
+      position:relative;
+      border-radius: 16px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      cursor:pointer;
+      min-height: 120px;
+      display:grid;
+      place-items:center;
+      color:var(--muted);
+      font-weight:900;
+      transition: transform .15s ease;
+    }
+    .thumb:hover{ transform: translateY(-2px); }
+    .thumb img{
+      width:100%; height:100%;
+      object-fit:cover;
+      display:block;
+      filter: contrast(1.05) brightness(.95);
+    }
+    .thumb .label{
+      position:absolute;
+      inset:auto 10px 10px 10px;
+      background: rgba(5,7,11,.72);
+      border:1px solid var(--line);
+      border-radius: 999px;
+      padding:8px 10px;
+      font-size:12px;
+      font-weight:950;
+      color:var(--text);
+      display:flex; gap:8px; align-items:center;
+      backdrop-filter: blur(10px);
+    }
+
+    .video-gallery{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(280px, 1fr));
+      gap:16px;
+    }
+
+.video-card{
+  position:relative;
+  border-radius:20px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow: 0 20px 40px rgba(0,0,0,.5);
+  background:#000;
+  aspect-ratio: 16 / 10;
+  min-height: 200px;
+}
+
+.video-card video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  filter: contrast(1.08) brightness(.95);
+}
+
+.video-card .label{
+  position:absolute;
+  left:12px;
+  bottom:12px;
+  background: rgba(0,0,0,.65);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:999px;
+  padding:8px 14px;
+  font-weight:900;
+  font-size:13px;
+  color:#fff;
+  backdrop-filter: blur(6px);
+}
+    /* FAQ */
+    details{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      border-radius: 16px;
+      padding:12px 14px;
+    }
+    details summary{
+      cursor:pointer;
+      font-weight:950;
+      list-style:none;
+      outline:none;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
+    }
+    details summary::-webkit-details-marker{ display:none; }
+    details p{ margin:10px 0 0; color:var(--muted); font-weight:650; }
+
+    /* Contact */
+    .contact{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    .contact a.link{
+      color: var(--silver1);
+      font-weight:950;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .form{ display:grid; gap:10px; }
+
+    input, textarea, select{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.22);
+      color: var(--text);
+      font-weight:800;
+      outline:none;
+    }
+    textarea{ min-height:120px; resize:vertical; }
+    input::placeholder, textarea::placeholder{ color: rgba(174,182,207,.75); }
+    .row{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+
+    /* Footer */
+    footer{
+      border-top:1px solid var(--line);
+      padding:24px 0 30px;
+      color:var(--muted);
+      font-weight:650;
+    }
+    .foot{
+      display:flex; align-items:flex-start; justify-content:space-between;
+      gap:12px; flex-wrap:wrap;
+    }
+    .company-data{
+      margin-top:14px;
+      padding-top:12px;
+      border-top:1px solid var(--line);
+      display:grid;
+      gap:6px;
+      color:var(--muted);
+      font-weight:650;
+      font-size:13px;
+    }
+
+    /* Modal (lightbox) */
+    .modal{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.78);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:1000;
+      padding:18px;
+    }
+    .modal.open{ display:flex; }
+    .modal-inner{
+      max-width: 980px;
+      width:100%;
+      border-radius: 22px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background: rgba(5,7,11,.96);
+      box-shadow: var(--shadow);
+      position:relative;
+    }
+    .modal-bar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 12px;
+      border-bottom:1px solid var(--line);
+      color:var(--muted);
+      font-weight:900;
+      font-size:13px;
+    }
+    .modal-content img{
+      width:100%;
+      max-height: 70vh;
+      object-fit:contain;
+      display:block;
+      background: #05070b;
+    }
+    .xbtn{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+      border-radius: 12px;
+      padding:8px 10px;
+      font-weight:950;
+      cursor:pointer;
+    }
+
+    /* Helpers */
+    .muted{ color:var(--muted); font-weight:650; }
+    .split{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+    .kbd{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      border-radius: 10px;
+      padding:4px 8px;
+      font-weight:950;
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      section{ padding:28px 0; }
+      section > .container{
+        border-radius:18px;
+        padding:16px 14px;
+      }
+      .topbar-inner{ min-height:88px; }
+      .subnav{ top:88px; }
+      .brand-logo{
+        height:72px;
+        max-height:72px;
+        max-width:240px;
+      }
+      .hero-grid{ grid-template-columns: 1fr; }
+      .grid-3{ grid-template-columns: 1fr; }
+      .grid-2{ grid-template-columns: 1fr; }
+      .pricing{ grid-template-columns: 1fr; }
+      .gallery{ grid-template-columns: repeat(2, 1fr); }
+      .video-gallery{ grid-template-columns: 1fr; }
+      .contact{ grid-template-columns: 1fr; }
+      nav{ display:none; }
+      .brand{ min-width: unset; }
+      .topbar .container{ max-width: var(--max); }
+    }
+    @media (min-width: 981px){
+  .brand > div{ display:block; }
+}
+  </style>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"AutoBodyShop",
+    "name":"Auto Perfekt plus",
+    "description":"Opravy karoserie metodou PDR (bez lakování). Důlky po krupobití a parkovací promáčkliny.",
+    "telephone":"+420777446759",
+    "address":{
+      "@type":"PostalAddress",
+      "streetAddress":"Doplňte ulici a číslo",
+      "addressLocality":"BRNO, JIHLAVA",
+      "postalCode":"602 00",
+      "addressCountry":"CZ"
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="container">
+      <div class="topbar-inner">
+        <a class="brand" href="#top" aria-label="Auto Perfekt plus">
+          <span class="brand-logo-cell">
+            <img src="images/logo2-trim.png" alt="Auto Perfekt plus" class="brand-logo">
+          </span>
+          <div class="brand-text">
+            <span>Auto Perfekt plus</span>
+            <span class="sub">PDR opravy karoserie bez lakování</span>
+          </div>
+        </a>
+
+        <div class="nav-cta">
+          <a class="btn" href="tel:+420777446759" aria-label="Zavolat">
+            📞 <span>+420 777 446 759</span>
+          </a>
+          <a class="btn btn-primary" href="#kontakt" aria-label="Objednat prohlídku">
+            ✨ Nezávazná prohlídka
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="subnav">
+    <div class="container">
+      <nav aria-label="Sekce stránky">
+        <a href="#sluzby">Služby</a>
+        <a href="#pdr">Co je PDR</a>
+        <a href="#cenik">Ceník</a>
+        <a href="#galerie">Galerie</a>
+        <a href="#faq">FAQ</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <main id="top" class="hero">
+    <!-- Pokud nemáš video, klidně tento blok nech. Když soubor neexistuje, video se jen nenačte. -->
+    <div class="hero-video" aria-hidden="true">
+      <video autoplay muted loop playsinline>
+        <source src="images/hero.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <span class="pill">🚗 PDR opravy • bez lakování • prémiový výsledek</span>
+          <h1>Promáčkliny pryč.<br/>Původní lak zůstává.</h1>
+          <p>
+            Opravujeme důlky po krupobití, parkovací promáčkliny a drobné ťukance metodou
+            <b>PDR (Paintless Dent Repair)</b> – rychle, precizně a bez zbytečných zásahů do karoserie.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#kontakt">📅 Objednat termín</a>
+            <a class="btn" href="#galerie">🖼️ Zobrazit výsledky</a>
+            <a class="btn" href="#cenik">💶 Orientační ceny</a>
+          </div>
+
+          <div class="hero-bullets" aria-label="Výhody">
+            <div class="bullet"><span class="dot"></span> Bez lakování</div>
+            <div class="bullet"><span class="dot"></span> Často hotovo tentýž den</div>
+            <div class="bullet"><span class="dot"></span> Zachování hodnoty vozu</div>
+            <div class="bullet"><span class="dot"></span> Prohlídka & kalkulace zdarma</div>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Rychlá poptávka">
+          <div class="mini">
+            <h3>Rychlá kalkulace z fotek</h3>
+            <p>Pošlete fotky poškození (2–3 úhly) a my vám obratem navrhneme řešení a cenu.</p>
+
+            <div class="grid" role="list">
+              <div class="stat" role="listitem">
+                <b>1–3 hod.</b>
+                <span>typická doba opravy</span>
+              </div>
+              <div class="stat" role="listitem">
+                <b>0% lakování</b>
+                <span>pokud lak není poškozen</span>
+              </div>
+              <div class="stat" role="listitem">
+                <b>Šetrně</b>
+                <span>bez broušení a tmelu</span>
+              </div>
+              <div class="stat" role="listitem">
+                <b>Férově</b>
+                <span>jasná domluva předem</span>
+              </div>
+            </div>
+
+            <div class="note">
+              <b>Tip:</b> Pokud je poškození po krupobití, často se dá řešit i přes pojišťovnu.
+              <div class="muted" style="margin-top:6px;">Pomůžeme s podklady a postupem.</div>
+            </div>
+
+            <div class="split" style="margin-top:4px;">
+              <a class="btn" href="mailto:info@autoperfektplus.cz?subject=Kalkulace%20PDR%20z%20fotek&body=Dobr%C3%BD%20den%2C%0Apos%C3%ADl%C3%A1m%20fotky%20po%C5%A1kozen%C3%AD%20a%20pros%C3%ADm%20o%20orienta%C4%8Dn%C3%AD%20kalkulaci.%0A%0ATyp%20auta%3A%20%0AM%C4%9Bsto%3A%20%0ATelefon%3A%20%0A%0AD%C4%9Bkuji.">
+                ✉️ Poslat e-mail
+              </a>
+              <span class="kbd">odpověď obvykle do 24 h</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- Services -->
+  <section id="sluzby">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h2>Služby</h2>
+          <p>Specializace na PDR opravy bez lakování – ideální pro poškození bez porušení laku.</p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="card service-card">
+          <div class="service-media">
+            <img src="images/pdr01.png" alt="Opravy po krupobití">
+          </div>
+          <div class="service-body">
+            <h3>Opravy po krupobití</h3>
+            <p>Profesionální PDR opravy po krupobití. Řešíme jednotlivé i rozsáhlé poškození bez lakování.</p>
+            <div class="tagrow">
+              <span class="tag">krupobití</span>
+              <span class="tag alt">PDR</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card service-card">
+          <div class="service-media">
+            <img src="images/pdr02.png" alt="Poškození od dveří na parkovišti">
+          </div>
+          <div class="service-body">
+            <h3>Promáčkliny od dveří na parkovišti</h3>
+            <p>Opravy poškození od úderu dveří na parkovišti. Precizní vyrovnání plechu bez zásahu do laku.</p>
+            <div class="tagrow">
+              <span class="tag">parkoviště</span>
+              <span class="tag alt">bez lakování</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card service-card">
+          <div class="service-media">
+            <img src="images/pdr03.png" alt="Opravy po vandalismu">
+          </div>
+          <div class="service-body">
+            <h3>Opravy po vandalismu</h3>
+            <p>Oprava důlků a promáčklin po vandalismu s důrazem na čistý výsledek a zachování původního laku.</p>
+            <div class="tagrow">
+              <span class="tag">vandalismus</span>
+              <span class="tag alt">detailně</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card service-card">
+          <div class="service-media">
+            <img src="images/pdr04.png" alt="Výjezd technika a kalkulace">
+          </div>
+          <div class="service-body">
+            <h3>Výjezd technika a kalkulace</h3>
+            <p>Po domluvě přijede technik, zhodnotí poškození a připraví přesnou kalkulaci opravy na místě.</p>
+            <div class="tagrow">
+              <span class="tag">výjezd</span>
+              <span class="tag alt">kalkulace</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card service-card">
+          <div class="service-media">
+            <img src="images/pdr05.png" alt="Přijedeme a opravíme na místě">
+          </div>
+          <div class="service-body">
+            <h3>Opravíme to rychle a kvalitně i další den</h3>
+            <p>Zakládáme si na rychlém termínu i kvalitním výsledku. Ve většině případů zvládneme opravu už následující den.</p>
+            <div class="tagrow">
+              <span class="tag">rychlý termín</span>
+              <span class="tag alt">kvalitně</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card service-card">
+          <div class="service-media">
+            <img src="images/pdr06.png" alt="Pomoc s dokumentací pro pojišťovnu">
+          </div>
+          <div class="service-body">
+            <h3>Pomůžeme s dokumentací pro pojišťovnu</h3>
+            <p>Pomůžeme vám s vyřízením podkladů a dokumentace, aby jednání s pojišťovnou proběhlo rychle a bez stresu.</p>
+            <div class="tagrow">
+              <span class="tag">pojišťovna</span>
+              <span class="tag alt">dokumentace</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PDR explainer -->
+  <section id="pdr">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h2>Co je PDR a kdy dává smysl</h2>
+          <p>PDR (Paintless Dent Repair) vrací plech do původního tvaru bez lakování – pokud není lak poškozen.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Výhody PDR</h3>
+          <p>
+            • Zachování původního laku a hodnoty vozu<br/>
+            • Bez tmelu, broušení a lakovny<br/>
+            • Často hotovo během pár hodin<br/>
+            • Výrazně nižší náklady oproti klasické opravě
+          </p>
+        </div>
+        <div class="card">
+          <h3>Kdy PDR nemusí stačit</h3>
+          <p>
+            Pokud je lak prasklý/odřený nebo je plech výrazně natažený, může být potřeba kombinace postupů.
+            Vždy řekneme upřímně, co je nejlepší řešení.
+          </p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:14px;">
+        <h3>Jak oprava probíhá</h3>
+        <p class="muted" style="margin-top:6px;">
+          1) Prohlídka a domluva ceny • 2) Přístup k místu poškození • 3) Tvarování plechu speciálními nástroji •
+          4) Kontrola pod světlem • 5) Předání vozu jako nové
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="cenik">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h2>Ceník</h2>
+          <p>Orientační ceny. Přesná kalkulace závisí na velikosti, umístění a přístupu k promáčklině.</p>
+        </div>
+        <div class="split">
+          <a class="btn" href="cenik-pdr.pdf" target="_blank" rel="noopener">📄 Otevřít PDF ceník</a>
+          <a class="btn btn-primary" href="#kontakt">📩 Chci přesnou kalkulaci</a>
+        </div>
+      </div>
+
+      <div class="pricing">
+        <div class="card">
+          <table class="price-table" aria-label="Orientační ceník">
+            <thead>
+              <tr>
+                <th>Služba</th>
+                <th>Orientačně od</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Malý důlek (např. 1–2 cm)</td>
+                <td>500 Kč</td>
+              </tr>
+              <tr>
+                <td>Střední promáčklina (např. 3–6 cm)</td>
+                <td>1000 Kč</td>
+              </tr>
+              <tr>
+                <td>Větší promáčklina / složitý přístup</td>
+                <td>1500 Kč</td>
+              </tr>
+              <tr>
+                <td>Krupobití (více důlků)</td>
+                <td>individuálně</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Co nejvíc ovlivňuje cenu</h3>
+          <p class="muted">
+            • Umístění (hrana dílu / výlisek)<br/>
+            • Přístup z vnitřní strany (demontáž čalounění)<br/>
+            • Hloubka a průměr promáčkliny<br/>
+            • Materiál (hliník/ocel)<br/>
+            • Počet důlků (krupobití)
+          </p>
+          <div class="tagrow" style="margin-top:12px;">
+            <span class="tag">kalkulace zdarma</span>
+            <span class="tag alt">rychlé termíny</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="galerie">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h2>Galerie před / po</h2>
+        </div>
+      </div>
+
+      <div class="video-gallery">
+
+  <div class="video-card">
+    <video autoplay muted loop playsinline>
+      <source src="videos/pdr-01.mp4" type="video/mp4">
+    </video>
+    <div class="label">Před → Po • blatník</div>
+  </div>
+
+  <div class="video-card">
+    <video autoplay muted loop playsinline>
+      <source src="videos/pdr-02.mp4" type="video/mp4">
+    </video>
+    <div class="label">Před → Po • dveře</div>
+  </div>
+  <div class="video-card">
+    <video autoplay muted loop playsinline>
+      <source src="videos/pdr-04.mp4" type="video/mp4">
+    </video>
+    <div class="label">Před → Po • krupobití</div>
+  </div>
+  <div class="video-card">
+    <video autoplay muted loop playsinline>
+      <source src="videos/pdr-05.mp4" type="video/mp4">
+    </video>
+    <div class="label">Před → Po • blatník</div>
+  </div>
+
+</div>
+
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h2>FAQ</h2>
+          <p>Nejčastější otázky před objednáním PDR opravy.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <details class="card">
+          <summary>Je PDR opravdu bez lakování?</summary>
+          <p>Ano – pokud je lak nepoškozený (bez prasklin a odlupů). Plech se tvaruje zpět bez zásahu do laku.</p>
+        </details>
+
+        <details class="card">
+          <summary>Jak rychle to bude hotové?</summary>
+          <p>U menších promáčklin často v řádu hodin. U krupobití nebo složitých míst záleží na rozsahu.</p>
+        </details>
+
+        <details class="card">
+          <summary>Co když je promáčklina na hraně dílu?</summary>
+          <p>Hrany a výlisky jsou náročnější, ale často stále řešitelné. Pošlete fotku a řekneme reálně možnosti.</p>
+        </details>
+
+        <details class="card">
+          <summary>Můžu poslat fotky a dostat cenu předem?</summary>
+          <p>Ano. Ideálně 2–3 fotky z různých úhlů + jedna širší fotka dílu, kde je promáčklina.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="kontakt">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h2>Kontakt & objednání</h2>
+          <p>Napiš nám nebo zavolej – prohlídka i kalkulace jsou nezávazné.</p>
+        </div>
+      </div>
+
+      <div class="contact">
+        <div class="card">
+          <h3>Auto Perfekt plus</h3>
+          <p class="muted" style="margin-top:6px;">
+            📍 <b>Adresa:</b> Brno, Jihlava<br/>
+            🕒 <b>Po–Pá:</b> 8:00–17:00 (nebo dle domluvy)<br/>
+            📞 <b>Telefon:</b> <a class="link" href="tel:+420777446759">+420 777 446 759</a><br/>
+            ✉️ <b>E-mail:</b> <a class="link" href="mailto:info@autoperfektplus.cz">info@autoperfektplus.cz</a>
+          </p>
+
+          <div class="card" style="margin-top:12px; background: rgba(255,210,77,.07); border-color: rgba(255,210,77,.18);">
+            <h3>Co poslat pro rychlou kalkulaci</h3>
+            <p class="muted">
+              • 2–3 fotky poškození (různý úhel, ideálně na denním světle)<br/>
+              • Typ auta (model/rok)<br/>
+              • Město a preferovaný termín
+            </p>
+          </div>
+
+          <div class="split" style="margin-top:12px;">
+            <a class="btn btn-primary" href="tel:+420777446759">📞 Zavolat</a>
+            <a class="btn" href="mailto:info@autoperfektplus.cz?subject=Objedn%C3%A1n%C3%AD%20PDR%20opravy&body=Dobr%C3%BD%20den%2C%0Apros%C3%ADm%20o%20term%C3%ADn%20prohl%C3%ADdky%20%2F%20kalkulace.%0A%0ATyp%20auta%3A%20%0APopis%20po%C5%A1kozen%C3%AD%3A%20%0APreferovan%C3%BD%20term%C3%ADn%3A%20%0ATelefon%3A%20%0A%0AD%C4%9Bkuji.">✉️ Napsat e-mail</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Rychlý formulář</h3>
+
+          <form class="form" id="leadForm">
+            <div class="row">
+              <input id="name" name="name" placeholder="Jméno" autocomplete="name" required />
+              <input id="phone" name="phone" placeholder="Telefon" autocomplete="tel" required />
+            </div>
+            <div class="row">
+              <input id="email" name="email" placeholder="E-mail" autocomplete="email" />
+              <select id="topic" name="topic">
+                <option value="PDR promáčklina">PDR promáčklina</option>
+                <option value="Krupobití">Krupobití</option>
+                <option value="Kalkulace z fotek">Kalkulace z fotek</option>
+                <option value="Jiné">Jiné</option>
+              </select>
+            </div>
+            <textarea id="msg" name="msg" placeholder="Popište poškození (kde, jak velké, kdy chcete termín)…" required></textarea>
+
+            <button class="btn btn-primary" type="submit">✅ Odeslat poptávku</button>
+            <div class="small">Odesláním souhlasíte se zpracováním údajů pro účely vyřízení poptávky.</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="foot">
+        <div>
+          <div style="font-weight:950; color: var(--text);">AutoPerfekt plus s.r.o.</div>
+          <div class="muted">PDR opravy karoserie bez lakování • CZ</div>
+        </div>
+        <div class="muted">
+          © <span id="year"></span> Auto Perfekt plus • Všechna práva vyhrazena
+        </div>
+      </div>
+      <div class="company-data" aria-label="Údaje společnosti">
+        <div><b style="color:var(--text)">Sídlo:</b> Holýšovská 2923/4, Stodůlky (Praha 13), 155 00 Praha</div>
+        <div><b style="color:var(--text)">Telefon:</b> +420 777 446 759 • <b style="color:var(--text)">E-mail:</b> info@autoperfektplus.cz</div>
+        <div><b style="color:var(--text)">IČO:</b> 22162992•</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal -->
+  <div class="modal" id="modal" aria-hidden="true" aria-label="Zvětšený obrázek">
+    <div class="modal-inner" role="dialog" aria-modal="true">
+      <div class="modal-bar">
+        <div id="modalTitle">Náhled</div>
+        <button class="xbtn" id="closeModal" aria-label="Zavřít">✕</button>
+      </div>
+      <div class="modal-content">
+        <img id="modalImg" alt="Zvětšený náhled" src="" />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Rok ve footeru
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener("click", (e) => {
+        const id = a.getAttribute("href");
+        if (!id || id === "#") return;
+        const el = document.querySelector(id);
+        if (!el) return;
+        e.preventDefault();
+        el.scrollIntoView({behavior:"smooth", block:"start"});
+        history.pushState(null, "", id);
+      });
+    });
+
+    // Galerie lightbox
+    const modal = document.getElementById("modal");
+    const modalImg = document.getElementById("modalImg");
+    const modalTitle = document.getElementById("modalTitle");
+    const closeModalBtn = document.getElementById("closeModal");
+
+    function openModal(src, title){
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden","false");
+      modalImg.src = src;
+      modalTitle.textContent = title || "Náhled";
+      document.body.style.overflow = "hidden";
+    }
+    function closeModal(){
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden","true");
+      modalImg.src = "";
+      document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll(".thumb").forEach(t => {
+      t.addEventListener("click", () => {
+        const full = t.getAttribute("data-full");
+        const title = t.getAttribute("data-title");
+        if(full) openModal(full, title);
+      });
+    });
+
+    modal.addEventListener("click", (e) => {
+      if(e.target === modal) closeModal();
+    });
+    closeModalBtn.addEventListener("click", closeModal);
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape") closeModal();
+    });
+
+    // Form -> mailto
+    document.getElementById("leadForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const topic = document.getElementById("topic").value;
+      const msg = document.getElementById("msg").value.trim();
+
+      const subject = encodeURIComponent(`Poptávka PDR – ${topic}`);
+      const body = encodeURIComponent(
+`Dobrý den,
+mám zájem o: ${topic}
+
+Jméno: ${name}
+Telefon: ${phone}
+E-mail: ${email || "-"}
+
+Popis poškození:
+${msg}
+
+Děkuji.`
+      );
+
+      window.location.href = `mailto:info@autoperfektplus.cz?subject=${subject}&body=${body}`;
+    });
+  </script>
+</body>
+</html>
