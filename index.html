@@ -556,12 +556,26 @@
   min-height: 200px;
 }
 
-.video-card video{
+.video-card video,
+.video-card img{
   width:100%;
   height:100%;
   object-fit:cover;
   display:block;
   filter: contrast(1.08) brightness(.95);
+}
+.video-card button.play-btn{
+  position:absolute;
+  right:12px;
+  top:12px;
+  border:1px solid rgba(255,255,255,.24);
+  background: rgba(0,0,0,.62);
+  color:#fff;
+  border-radius:999px;
+  padding:8px 12px;
+  font-size:12px;
+  font-weight:900;
+  cursor:pointer;
 }
 
 .video-card .label{
@@ -1081,29 +1095,25 @@
 
       <div class="video-gallery">
 
-  <div class="video-card">
-    <video class="lazy-video" controls playsinline preload="none" poster="images/optimized/pdr01.jpg">
-      <source data-src="videos/pdr-01.mp4" type="video/mp4">
-    </video>
+  <div class="video-card video-card-lite" data-video="videos/pdr-01.mp4" data-poster="images/optimized/pdr01.jpg" data-label="Před → Po • blatník">
+    <img src="images/optimized/pdr01.jpg" alt="Před po blatník" loading="lazy" decoding="async">
+    <button class="play-btn" type="button">▶ Přehrát</button>
     <div class="label">Před → Po • blatník</div>
   </div>
 
-  <div class="video-card">
-    <video class="lazy-video" controls playsinline preload="none" poster="images/optimized/pdr02.jpg">
-      <source data-src="videos/pdr-02.mp4" type="video/mp4">
-    </video>
+  <div class="video-card video-card-lite" data-video="videos/pdr-02.mp4" data-poster="images/optimized/pdr02.jpg" data-label="Před → Po • dveře">
+    <img src="images/optimized/pdr02.jpg" alt="Před po dveře" loading="lazy" decoding="async">
+    <button class="play-btn" type="button">▶ Přehrát</button>
     <div class="label">Před → Po • dveře</div>
   </div>
-  <div class="video-card">
-    <video class="lazy-video" controls playsinline preload="none" poster="images/optimized/pdr04.jpg">
-      <source data-src="videos/pdr-04.mp4" type="video/mp4">
-    </video>
+  <div class="video-card video-card-lite" data-video="videos/pdr-04.mp4" data-poster="images/optimized/pdr04.jpg" data-label="Před → Po • krupobití">
+    <img src="images/optimized/pdr04.jpg" alt="Před po krupobití" loading="lazy" decoding="async">
+    <button class="play-btn" type="button">▶ Přehrát</button>
     <div class="label">Před → Po • krupobití</div>
   </div>
-  <div class="video-card">
-    <video class="lazy-video" controls playsinline preload="none" poster="images/optimized/pdr05.jpg">
-      <source data-src="videos/pdr-05.mp4" type="video/mp4">
-    </video>
+  <div class="video-card video-card-lite" data-video="videos/pdr-05.mp4" data-poster="images/optimized/pdr05.jpg" data-label="Před → Po • blatník">
+    <img src="images/optimized/pdr05.jpg" alt="Před po blatník 2" loading="lazy" decoding="async">
+    <button class="play-btn" type="button">▶ Přehrát</button>
     <div class="label">Před → Po • blatník</div>
   </div>
 
@@ -1294,20 +1304,21 @@
       if(e.key === "Escape") closeModal();
     });
 
-    // Lazy load videi v galerii: nacitaji se az po kliknuti.
-    const lazyVideos = document.querySelectorAll("video.lazy-video");
-    const loadVideo = (video) => {
-      if (video.dataset.loaded === "true") return;
-      const source = video.querySelector("source[data-src]");
-      if (!source) return;
-      source.src = source.dataset.src;
-      video.load();
-      video.dataset.loaded = "true";
-    };
-    lazyVideos.forEach((video) => {
-      video.addEventListener("click", () => {
-        loadVideo(video);
-        video.play().catch(() => {});
+    // Videa v galerii se nactou az po kliknuti na kartu.
+    document.querySelectorAll(".video-card-lite").forEach((card) => {
+      card.addEventListener("click", () => {
+        if (card.dataset.loaded === "true") return;
+        const src = card.dataset.video;
+        const poster = card.dataset.poster || "";
+        if (!src) return;
+
+        card.innerHTML = `
+          <video controls playsinline autoplay preload="metadata" poster="${poster}">
+            <source src="${src}" type="video/mp4">
+          </video>
+          <div class="label">${card.dataset.label || "Video"}</div>
+        `;
+        card.dataset.loaded = "true";
       }, { once: true });
     });
 
