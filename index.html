@@ -544,7 +544,7 @@
       display:flex;
       gap:10px;
       align-items:stretch;
-      overflow:hidden;
+      overflow:visible;
     }
 
     .video-card{
@@ -557,16 +557,19 @@
       aspect-ratio: 16 / 8.5;
       flex: 1 1 14%;
       min-width: 105px;
-      transition: flex .28s ease, box-shadow .22s ease, border-color .22s ease, opacity .22s ease;
+      transform-origin:center center;
+      z-index:0;
+      transition: flex .28s ease, transform .22s ease, box-shadow .22s ease, border-color .22s ease, opacity .22s ease;
     }
 
     .video-gallery:hover .video-card{
       opacity:.72;
     }
     .video-gallery .video-card:hover{
-      flex: 3 1 14%;
+      flex: 2.2 1 14%;
       opacity:1;
-      transform:none;
+      transform: scale(1.12);
+      z-index:3;
       border-color: rgba(255,210,77,.36);
       box-shadow: 0 22px 40px rgba(0,0,0,.45);
     }
