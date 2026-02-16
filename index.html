@@ -545,6 +545,7 @@
       gap:12px;
       align-items:stretch;
       overflow:hidden;
+      min-height: 320px;
     }
 
     .video-card{
@@ -554,9 +555,9 @@
       border:1px solid rgba(255,255,255,.16);
       box-shadow: 0 14px 28px rgba(0,0,0,.35);
       background: linear-gradient(140deg, rgba(14,18,26,.95), rgba(8,10,15,.98));
-      aspect-ratio: 16 / 10;
-      min-height: 220px;
-      flex: 1 1 0;
+      min-height: 320px;
+      flex: 1 1 12%;
+      min-width: 88px;
       transition: flex .28s ease, transform .22s ease, box-shadow .22s ease, border-color .22s ease, opacity .22s ease;
     }
 
@@ -564,7 +565,7 @@
       opacity:.72;
     }
     .video-gallery .video-card:hover{
-      flex: 2.2 1 0;
+      flex: 3.6 1 0;
       opacity:1;
       transform: translateY(-4px);
       border-color: rgba(255,210,77,.36);
