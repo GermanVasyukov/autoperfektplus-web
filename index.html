@@ -541,57 +541,72 @@
     }
 
     .video-gallery{
-      display:grid;
-      grid-template-columns: repeat(2, minmax(280px, 1fr));
-      gap:16px;
+      display:flex;
+      gap:12px;
+      align-items:stretch;
+      overflow:hidden;
     }
 
-.video-card{
-  position:relative;
-  border-radius:20px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.12);
-  box-shadow: 0 20px 40px rgba(0,0,0,.5);
-  background:#000;
-  aspect-ratio: 16 / 10;
-  min-height: 200px;
-}
+    .video-card{
+      position:relative;
+      border-radius:20px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.16);
+      box-shadow: 0 14px 28px rgba(0,0,0,.35);
+      background: linear-gradient(140deg, rgba(14,18,26,.95), rgba(8,10,15,.98));
+      aspect-ratio: 16 / 10;
+      min-height: 220px;
+      flex: 1 1 0;
+      transition: flex .28s ease, transform .22s ease, box-shadow .22s ease, border-color .22s ease, opacity .22s ease;
+    }
 
-.video-card video,
-.video-card img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-  filter: contrast(1.08) brightness(.95);
-}
-.video-card button.play-btn{
-  position:absolute;
-  right:12px;
-  top:12px;
-  border:1px solid rgba(255,255,255,.24);
-  background: rgba(0,0,0,.62);
-  color:#fff;
-  border-radius:999px;
-  padding:8px 12px;
-  font-size:12px;
-  font-weight:900;
-  cursor:pointer;
-}
+    .video-gallery:hover .video-card{
+      opacity:.72;
+    }
+    .video-gallery .video-card:hover{
+      flex: 2.2 1 0;
+      opacity:1;
+      transform: translateY(-4px);
+      border-color: rgba(255,210,77,.36);
+      box-shadow: 0 22px 40px rgba(0,0,0,.45);
+    }
 
-.video-card .label{
-  position:absolute;
-  left:12px;
-  bottom:12px;
-  background: rgba(0,0,0,.65);
-  border:1px solid rgba(255,255,255,.18);
-  border-radius:999px;
-  padding:8px 14px;
-  font-weight:900;
-  font-size:13px;
-  color:#fff;
-  backdrop-filter: blur(6px);
-}
+    .video-card video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      filter: contrast(1.08) brightness(.92);
+    }
+
+    .video-card .label{
+      position:absolute;
+      left:12px;
+      bottom:12px;
+      background: rgba(0,0,0,.65);
+      border:1px solid rgba(255,255,255,.22);
+      border-radius:999px;
+      padding:8px 14px;
+      font-weight:900;
+      font-size:13px;
+      color:#fff;
+      backdrop-filter: blur(6px);
+      z-index:2;
+    }
+    .video-card .hover-hint{
+      position:absolute;
+      right:12px;
+      top:12px;
+      background: rgba(0,0,0,.58);
+      border:1px solid rgba(255,255,255,.22);
+      border-radius:999px;
+      padding:7px 11px;
+      font-size:12px;
+      font-weight:850;
+      color:#dce3f8;
+      z-index:2;
+      pointer-events:none;
+    }
     /* FAQ */
     details{
       border:1px solid var(--line);
@@ -778,7 +793,24 @@
       .grid-2{ grid-template-columns: 1fr; }
       .pricing{ grid-template-columns: 1fr; }
       .gallery{ grid-template-columns: repeat(2, 1fr); }
-      .video-gallery{ grid-template-columns: 1fr; }
+      .video-gallery{
+        display:grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap:10px;
+      }
+      .video-gallery:hover .video-card{
+        opacity:1;
+      }
+      .video-gallery .video-card:hover{
+        flex:1 1 auto;
+        transform:none;
+      }
+      .video-card{
+        min-height:170px;
+      }
+      .video-card .hover-hint{
+        display:none;
+      }
       .contact{ grid-template-columns: 1fr; }
       .brand{ min-width: unset; }
       .topbar .container{ max-width: var(--max); }
@@ -793,6 +825,9 @@
         max-width:170px;
       }
       .nav-cta .btn-primary{ display:none; }
+      .video-gallery{
+        grid-template-columns: 1fr;
+      }
     }
     @media (max-width: 420px){
       :root{ --header-h:62px; }
@@ -1152,25 +1187,33 @@
 
       <div class="video-gallery">
 
-  <div class="video-card video-card-lite" data-video="videos/pdr-01.mp4" data-poster="images/optimized/pdr01.jpg" data-label="Před → Po • blatník">
-    <img src="images/optimized/pdr01.jpg" alt="Před po blatník" loading="lazy" decoding="async">
-    <button class="play-btn" type="button">▶ Přehrát</button>
+  <div class="video-card" data-label="Před → Po • blatník">
+    <video class="gallery-video" muted loop playsinline preload="none">
+      <source data-src="videos/pdr-01.mp4" type="video/mp4">
+    </video>
+    <div class="hover-hint">Najeď myší</div>
     <div class="label">Před → Po • blatník</div>
   </div>
 
-  <div class="video-card video-card-lite" data-video="videos/pdr-02.mp4" data-poster="images/optimized/pdr02.jpg" data-label="Před → Po • dveře">
-    <img src="images/optimized/pdr02.jpg" alt="Před po dveře" loading="lazy" decoding="async">
-    <button class="play-btn" type="button">▶ Přehrát</button>
+  <div class="video-card" data-label="Před → Po • dveře">
+    <video class="gallery-video" muted loop playsinline preload="none">
+      <source data-src="videos/pdr-02.mp4" type="video/mp4">
+    </video>
+    <div class="hover-hint">Najeď myší</div>
     <div class="label">Před → Po • dveře</div>
   </div>
-  <div class="video-card video-card-lite" data-video="videos/pdr-04.mp4" data-poster="images/optimized/pdr04.jpg" data-label="Před → Po • krupobití">
-    <img src="images/optimized/pdr04.jpg" alt="Před po krupobití" loading="lazy" decoding="async">
-    <button class="play-btn" type="button">▶ Přehrát</button>
+  <div class="video-card" data-label="Před → Po • krupobití">
+    <video class="gallery-video" muted loop playsinline preload="none">
+      <source data-src="videos/pdr-04.mp4" type="video/mp4">
+    </video>
+    <div class="hover-hint">Najeď myší</div>
     <div class="label">Před → Po • krupobití</div>
   </div>
-  <div class="video-card video-card-lite" data-video="videos/pdr-05.mp4" data-poster="images/optimized/pdr05.jpg" data-label="Před → Po • blatník">
-    <img src="images/optimized/pdr05.jpg" alt="Před po blatník 2" loading="lazy" decoding="async">
-    <button class="play-btn" type="button">▶ Přehrát</button>
+  <div class="video-card" data-label="Před → Po • blatník">
+    <video class="gallery-video" muted loop playsinline preload="none">
+      <source data-src="videos/pdr-05.mp4" type="video/mp4">
+    </video>
+    <div class="hover-hint">Najeď myší</div>
     <div class="label">Před → Po • blatník</div>
   </div>
 
@@ -1361,22 +1404,37 @@
       if(e.key === "Escape") closeModal();
     });
 
-    // Videa v galerii se nactou az po kliknuti na kartu.
-    document.querySelectorAll(".video-card-lite").forEach((card) => {
-      card.addEventListener("click", () => {
-        if (card.dataset.loaded === "true") return;
-        const src = card.dataset.video;
-        const poster = card.dataset.poster || "";
-        if (!src) return;
+    // Galerie videi: nacist a prehrat pri najeti mysi, zastavit po odjeti.
+    document.querySelectorAll(".gallery-video").forEach((video) => {
+      const source = video.querySelector("source[data-src]");
+      const ensureLoaded = () => {
+        if (!source || source.src) return;
+        source.src = source.dataset.src;
+        video.load();
+      };
 
-        card.innerHTML = `
-          <video controls playsinline autoplay preload="metadata" poster="${poster}">
-            <source src="${src}" type="video/mp4">
-          </video>
-          <div class="label">${card.dataset.label || "Video"}</div>
-        `;
-        card.dataset.loaded = "true";
-      }, { once: true });
+      const parentCard = video.closest(".video-card");
+      if (!parentCard) return;
+
+      parentCard.addEventListener("mouseenter", () => {
+        ensureLoaded();
+        video.play().catch(() => {});
+      });
+
+      parentCard.addEventListener("mouseleave", () => {
+        video.pause();
+        video.currentTime = 0;
+      });
+
+      // Na dotykovych zarizenich: prvni tap nacte/prehraje video.
+      parentCard.addEventListener("click", () => {
+        ensureLoaded();
+        if (video.paused) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
     });
 
     // Form -> mailto
