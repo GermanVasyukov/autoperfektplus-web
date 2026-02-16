@@ -554,7 +554,7 @@
       border:1px solid rgba(255,255,255,.16);
       box-shadow: 0 14px 28px rgba(0,0,0,.35);
       background: linear-gradient(140deg, rgba(18,24,36,.95), rgba(10,14,22,.98));
-      aspect-ratio: 16 / 10;
+      aspect-ratio: 16 / 8.5;
       flex: 1 1 14%;
       min-width: 105px;
       transition: flex .28s ease, box-shadow .22s ease, border-color .22s ease, opacity .22s ease;
@@ -564,7 +564,7 @@
       opacity:.72;
     }
     .video-gallery .video-card:hover{
-      flex: 2.1 1 0;
+      flex: 3 1 14%;
       opacity:1;
       transform:none;
       border-color: rgba(255,210,77,.36);
@@ -806,7 +806,7 @@
         transform:none;
       }
       .video-card{
-        min-height:170px;
+        min-height:150px;
       }
       .video-card .hover-hint{
         display:none;
@@ -905,11 +905,7 @@
   <!-- Hero -->
   <main id="top" class="hero">
     <!-- Pokud nemáš video, klidně tento blok nech. Když soubor neexistuje, video se jen nenačte. -->
-    <div class="hero-video" aria-hidden="true">
-      <video autoplay muted loop playsinline>
-        <source src="images/hero.mp4" type="video/mp4">
-      </video>
-    </div>
+    <div class="hero-video" aria-hidden="true"></div>
     <div class="hero-overlay" aria-hidden="true"></div>
 
     <div class="container">
@@ -1188,7 +1184,7 @@
       <div class="video-gallery">
 
   <div class="video-card" data-label="Před → Po • blatník">
-    <video class="gallery-video" muted loop playsinline preload="metadata">
+    <video class="gallery-video" muted loop playsinline preload="none">
       <source data-src="videos/pdr-01.mp4" type="video/mp4">
     </video>
     <div class="hover-hint">Najeď myší</div>
@@ -1196,21 +1192,21 @@
   </div>
 
   <div class="video-card" data-label="Před → Po • dveře">
-    <video class="gallery-video" muted loop playsinline preload="metadata">
+    <video class="gallery-video" muted loop playsinline preload="none">
       <source data-src="videos/pdr-02.mp4" type="video/mp4">
     </video>
     <div class="hover-hint">Najeď myší</div>
     <div class="label">Před → Po • dveře</div>
   </div>
   <div class="video-card" data-label="Před → Po • krupobití">
-    <video class="gallery-video" muted loop playsinline preload="metadata">
+    <video class="gallery-video" muted loop playsinline preload="none">
       <source data-src="videos/pdr-04.mp4" type="video/mp4">
     </video>
     <div class="hover-hint">Najeď myší</div>
     <div class="label">Před → Po • krupobití</div>
   </div>
   <div class="video-card" data-label="Před → Po • blatník">
-    <video class="gallery-video" muted loop playsinline preload="metadata">
+    <video class="gallery-video" muted loop playsinline preload="none">
       <source data-src="videos/pdr-05.mp4" type="video/mp4">
     </video>
     <div class="hover-hint">Najeď myší</div>
@@ -1404,7 +1400,7 @@
       if(e.key === "Escape") closeModal();
     });
 
-    // Galerie videi: zdroje pripravit hned, prehrat pri najeti mysi.
+    // Galerie videi: nacist az pri interakci (hover/klik) kvuli rychlosti.
     document.querySelectorAll(".gallery-video").forEach((video) => {
       const source = video.querySelector("source[data-src]");
       const ensureLoaded = () => {
@@ -1412,15 +1408,6 @@
         source.src = source.dataset.src;
         video.load();
       };
-      ensureLoaded();
-      video.addEventListener("loadeddata", () => {
-        if (video.dataset.previewReady === "true") return;
-        try {
-          video.currentTime = 0.05;
-        } catch (_) {}
-        video.pause();
-        video.dataset.previewReady = "true";
-      });
 
       const parentCard = video.closest(".video-card");
       if (!parentCard) return;
@@ -1428,6 +1415,7 @@
 
       if (canHover) {
         parentCard.addEventListener("mouseenter", () => {
+          ensureLoaded();
           video.play().catch(() => {});
         });
 
@@ -1439,7 +1427,12 @@
 
       // Na dotykovych zarizenich: prvni tap nacte/prehraje video.
       parentCard.addEventListener("click", () => {
-        video.play().catch(() => {});
+        ensureLoaded();
+        if (video.paused) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
       });
     });
 
