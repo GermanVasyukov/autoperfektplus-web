@@ -448,6 +448,7 @@
       aspect-ratio: 16 / 9;
       background: transparent;
       border-bottom:1px solid var(--line);
+      overflow:hidden;
     }
     .service-media img{
       width:100%;
@@ -455,6 +456,10 @@
       object-fit:contain;
       display:block;
       filter: contrast(1.06) brightness(.94);
+    }
+    .service-media img.media-tall{
+      transform: scale(1.36);
+      transform-origin:center;
     }
     .service-body{
       padding:14px;
@@ -991,7 +996,7 @@
       <div class="grid-3">
         <div class="card service-card">
           <div class="service-media">
-            <img src="images/pdr01.png" alt="Opravy po krupobití" loading="lazy" decoding="async">
+            <img class="media-tall" src="images/pdr01.png" alt="Opravy po krupobití" loading="lazy" decoding="async">
           </div>
           <div class="service-body">
             <h3>Opravy po krupobití</h3>
