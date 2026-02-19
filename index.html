@@ -1194,7 +1194,7 @@
       <div class="video-gallery">
 
   <div class="video-card" data-label="Před → Po • blatník">
-    <video class="gallery-video" muted loop playsinline preload="none">
+    <video class="gallery-video" muted loop playsinline preload="metadata" data-preview="4.5">
       <source data-src="videos/pdr-01.mp4" type="video/mp4">
     </video>
     <div class="hover-hint">Najeď myší</div>
@@ -1202,21 +1202,21 @@
   </div>
 
   <div class="video-card" data-label="Před → Po • dveře">
-    <video class="gallery-video" muted loop playsinline preload="none">
+    <video class="gallery-video" muted loop playsinline preload="metadata" data-preview="4.5">
       <source data-src="videos/pdr-02.mp4" type="video/mp4">
     </video>
     <div class="hover-hint">Najeď myší</div>
     <div class="label">Před → Po • dveře</div>
   </div>
   <div class="video-card" data-label="Před → Po • krupobití">
-    <video class="gallery-video" muted loop playsinline preload="none">
+    <video class="gallery-video" muted loop playsinline preload="metadata" data-preview="4.5">
       <source data-src="videos/pdr-04.mp4" type="video/mp4">
     </video>
     <div class="hover-hint">Najeď myší</div>
     <div class="label">Před → Po • krupobití</div>
   </div>
   <div class="video-card" data-label="Před → Po • blatník">
-    <video class="gallery-video" muted loop playsinline preload="none">
+    <video class="gallery-video" muted loop playsinline preload="metadata" data-preview="4.5">
       <source data-src="videos/pdr-05.mp4" type="video/mp4">
     </video>
     <div class="hover-hint">Najeď myší</div>
@@ -1413,11 +1413,23 @@
     // Galerie videi: nacist az pri interakci (hover/klik) kvuli rychlosti.
     document.querySelectorAll(".gallery-video").forEach((video) => {
       const source = video.querySelector("source[data-src]");
+      const previewTime = Number.parseFloat(video.dataset.preview || "4.5");
       const ensureLoaded = () => {
         if (!source || source.src) return;
         source.src = source.dataset.src;
         video.load();
       };
+      const setPreviewFrame = () => {
+        const duration = Number.isFinite(video.duration) ? video.duration : 0;
+        if (duration <= 0) return;
+        const safePreview = Math.max(0, Math.min(previewTime, Math.max(0, duration - 0.15)));
+        try {
+          video.currentTime = safePreview;
+        } catch (_) {}
+        video.pause();
+      };
+      ensureLoaded();
+      video.addEventListener("loadedmetadata", setPreviewFrame, { once: true });
 
       const parentCard = video.closest(".video-card");
       if (!parentCard) return;
@@ -1431,7 +1443,7 @@
 
         parentCard.addEventListener("mouseleave", () => {
           video.pause();
-          video.currentTime = 0;
+          setPreviewFrame();
         });
       }
 
