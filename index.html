@@ -1194,7 +1194,7 @@
       <div class="video-gallery">
 
   <div class="video-card" data-label="Před → Po • blatník">
-    <video class="gallery-video" muted loop playsinline preload="metadata" data-preview="4.5">
+    <video class="gallery-video" muted loop playsinline preload="metadata" data-preview="2.5">
       <source data-src="videos/pdr-01.mp4" type="video/mp4">
     </video>
     <div class="hover-hint">Najeď myší</div>
@@ -1202,21 +1202,21 @@
   </div>
 
   <div class="video-card" data-label="Před → Po • dveře">
-    <video class="gallery-video" muted loop playsinline preload="metadata" data-preview="4.5">
+    <video class="gallery-video" muted loop playsinline preload="metadata" data-preview="2.5">
       <source data-src="videos/pdr-02.mp4" type="video/mp4">
     </video>
     <div class="hover-hint">Najeď myší</div>
     <div class="label">Před → Po • dveře</div>
   </div>
   <div class="video-card" data-label="Před → Po • krupobití">
-    <video class="gallery-video" muted loop playsinline preload="metadata" data-preview="4.5">
+    <video class="gallery-video" muted loop playsinline preload="metadata" data-preview="2.5">
       <source data-src="videos/pdr-04.mp4" type="video/mp4">
     </video>
     <div class="hover-hint">Najeď myší</div>
     <div class="label">Před → Po • krupobití</div>
   </div>
   <div class="video-card" data-label="Před → Po • blatník">
-    <video class="gallery-video" muted loop playsinline preload="metadata" data-preview="4.5">
+    <video class="gallery-video" muted loop playsinline preload="metadata" data-preview="2.5">
       <source data-src="videos/pdr-05.mp4" type="video/mp4">
     </video>
     <div class="hover-hint">Najeď myší</div>
@@ -1413,7 +1413,7 @@
     // Galerie videi: nacist az pri interakci (hover/klik) kvuli rychlosti.
     document.querySelectorAll(".gallery-video").forEach((video) => {
       const source = video.querySelector("source[data-src]");
-      const previewTime = Number.parseFloat(video.dataset.preview || "4.5");
+      const previewTime = Number.parseFloat(video.dataset.preview || "2.5");
       const ensureLoaded = () => {
         if (!source || source.src) return;
         source.src = source.dataset.src;
