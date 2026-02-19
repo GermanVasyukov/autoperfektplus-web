@@ -394,7 +394,7 @@
       --section-glow: rgba(255,210,77,.09);
     }
     #galerie > .container{
-      overflow:visible;
+      overflow:hidden;
     }
     #faq{
       --section-tint: rgba(183,190,202,.04);
@@ -572,11 +572,10 @@
 
     .video-gallery .video-card:hover,
     .video-gallery .video-card.is-active{
-      border-width:3px;
-      border-color: rgba(255,210,77,.72);
-      filter: brightness(1.02);
-      box-shadow: 0 14px 24px rgba(0,0,0,.34);
-      transform: scale(1.04);
+      border-color: rgba(255,255,255,.16);
+      filter:none;
+      box-shadow: 0 10px 18px rgba(0,0,0,.24), 0 0 0 3px rgba(255,210,77,.35) inset;
+      transform:none;
       z-index:3;
     }
 
