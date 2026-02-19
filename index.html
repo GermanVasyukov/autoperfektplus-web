@@ -559,17 +559,16 @@
       border:1px solid rgba(255,255,255,.16);
       box-shadow: 0 12px 22px rgba(0,0,0,.30);
       background: linear-gradient(140deg, rgba(18,24,36,.95), rgba(10,14,22,.98));
-      min-height: 220px;
+      aspect-ratio: 9 / 16;
       transform-origin:center center;
       z-index:0;
-      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+      transition: box-shadow .2s ease, border-color .2s ease, filter .2s ease;
     }
 
     .video-gallery .video-card:hover{
-      transform: scale(1.05);
-      z-index:3;
       border-color: rgba(255,210,77,.32);
-      box-shadow: 0 18px 32px rgba(0,0,0,.40);
+      box-shadow: 0 16px 28px rgba(0,0,0,.38);
+      filter: brightness(1.03);
     }
 
     .video-card video{
@@ -801,7 +800,7 @@
         gap:10px;
       }
       .video-card{
-        min-height:190px;
+        aspect-ratio: 9 / 16;
       }
       .contact{ grid-template-columns: 1fr; }
       .brand{ min-width: unset; }
@@ -822,10 +821,10 @@
         grid-template-columns: 1fr;
       }
       .video-gallery .video-card:hover{
-        transform:none;
+        filter:none;
       }
       .video-card{
-        min-height:180px;
+        aspect-ratio: 9 / 16;
       }
       .video-card .hover-hint{
         display:none;
