@@ -395,7 +395,6 @@
     }
     #galerie > .container{
       overflow:visible;
-      max-width: 1380px;
     }
     #faq{
       --section-tint: rgba(183,190,202,.04);
@@ -545,11 +544,12 @@
     }
 
     .video-gallery{
-      display:grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap:12px;
-      margin-top:10px;
+      display:flex;
       align-items:stretch;
+      overflow:visible;
+      gap:0;
+      margin-top:10px;
+      padding:4px 8px 6px;
     }
 
     .video-card{
@@ -560,15 +560,25 @@
       box-shadow: 0 12px 22px rgba(0,0,0,.30);
       background: linear-gradient(140deg, rgba(18,24,36,.95), rgba(10,14,22,.98));
       aspect-ratio: 9 / 16;
+      flex: 0 0 clamp(170px, 15vw, 220px);
+      margin-left:-34px;
       transform-origin:center center;
       z-index:0;
-      transition: box-shadow .2s ease, border-color .2s ease, filter .2s ease;
+      transition: transform .22s ease, box-shadow .2s ease, border-color .2s ease, filter .2s ease;
+    }
+    .video-card:first-child{
+      margin-left:0;
     }
 
     .video-gallery .video-card:hover{
       border-color: rgba(255,210,77,.32);
       box-shadow: 0 16px 28px rgba(0,0,0,.38);
       filter: brightness(1.03);
+      transform: translateY(-4px);
+      z-index:5;
+    }
+    .video-gallery .video-card:hover ~ .video-card{
+      transform: translateX(34px);
     }
 
     .video-card video{
@@ -796,11 +806,18 @@
       .pricing{ grid-template-columns: 1fr; }
       .gallery{ grid-template-columns: repeat(2, 1fr); }
       .video-gallery{
+        display:grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap:10px;
+        padding:0;
       }
       .video-card{
         aspect-ratio: 9 / 16;
+        margin-left:0;
+        flex: 1 1 auto;
+      }
+      .video-gallery .video-card:hover ~ .video-card{
+        transform:none;
       }
       .contact{ grid-template-columns: 1fr; }
       .brand{ min-width: unset; }
@@ -819,6 +836,7 @@
       .video-gallery{
         display:grid;
         grid-template-columns: 1fr;
+        padding:0;
       }
       .video-gallery .video-card:hover{
         filter:none;
