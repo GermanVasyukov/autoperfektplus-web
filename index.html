@@ -753,6 +753,29 @@
       color:var(--muted);
     }
 
+    /* Performance fallback for mobile/tablet: lighter paint/compositing */
+    @media (max-width: 1024px){
+      body::before{
+        opacity:.22;
+        mix-blend-mode: normal;
+      }
+      .topbar,
+      .subnav,
+      .thumb .label,
+      .video-card .label{
+        backdrop-filter: none;
+      }
+      .hero-card::before,
+      .hero-card::after{
+        filter:none;
+        opacity:.6;
+      }
+      .service-media img,
+      .video-card video{
+        filter:none;
+      }
+    }
+
     /* Responsive */
     @media (max-width: 1024px){
       :root{ --header-h:82px; }
@@ -873,7 +896,7 @@
       <div class="topbar-inner">
         <a class="brand" href="#top" aria-label="Auto Perfekt plus">
           <span class="brand-logo-cell">
-            <img src="images/logo2-trim.png" alt="Auto Perfekt plus" class="brand-logo" loading="eager" decoding="async" fetchpriority="high">
+            <img src="images/logo.webp" alt="Auto Perfekt plus" class="brand-logo" loading="eager" decoding="async" fetchpriority="high">
           </span>
           <div class="brand-text">
             <span>Auto Perfekt plus</span>
