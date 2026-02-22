@@ -453,14 +453,10 @@
     .service-media img{
       width:100%;
       height:100%;
-      object-fit:contain;
+      object-fit:cover;
+      object-position:center;
       display:block;
       filter: contrast(1.06) brightness(.94);
-    }
-    .service-media img.media-tall{
-      object-fit: cover;
-      transform: scale(1.18);
-      transform-origin:center;
     }
     .service-body{
       padding:14px;
@@ -997,7 +993,7 @@
       <div class="grid-3">
         <div class="card service-card">
           <div class="service-media">
-            <img class="media-tall" src="images/pdr01.png" alt="Opravy po krupobití" loading="lazy" decoding="async">
+            <img class="media-tall" src="images/pdr01.webp" alt="Opravy po krupobití" loading="lazy" decoding="async">
           </div>
           <div class="service-body">
             <h3>Opravy po krupobití</h3>
@@ -1011,7 +1007,7 @@
 
         <div class="card service-card">
           <div class="service-media">
-            <img src="images/pdr02.png" alt="Poškození od dveří na parkovišti" loading="lazy" decoding="async">
+            <img src="images/pdr02.webp" alt="Poškození od dveří na parkovišti" loading="lazy" decoding="async">
           </div>
           <div class="service-body">
             <h3>Promáčkliny od dveří na parkovišti</h3>
@@ -1025,7 +1021,7 @@
 
         <div class="card service-card">
           <div class="service-media">
-            <img src="images/pdr03.png" alt="Opravy po vandalismu" loading="lazy" decoding="async">
+            <img src="images/pdr03.webp" alt="Opravy po vandalismu" loading="lazy" decoding="async">
           </div>
           <div class="service-body">
             <h3>Opravy po vandalismu</h3>
@@ -1039,7 +1035,7 @@
 
         <div class="card service-card">
           <div class="service-media">
-            <img src="images/pdr04.png" alt="Výjezd technika a kalkulace" loading="lazy" decoding="async">
+            <img src="images/pdr04.webp" alt="Výjezd technika a kalkulace" loading="lazy" decoding="async">
           </div>
           <div class="service-body">
             <h3>Výjezd technika a kalkulace</h3>
@@ -1053,7 +1049,7 @@
 
         <div class="card service-card">
           <div class="service-media">
-            <img src="images/pdr05.png" alt="Přijedeme a opravíme na místě" loading="lazy" decoding="async">
+            <img src="images/pdr05.webp" alt="Přijedeme a opravíme na místě" loading="lazy" decoding="async">
           </div>
           <div class="service-body">
             <h3>Opravíme to rychle a kvalitně i další den</h3>
@@ -1067,7 +1063,7 @@
 
         <div class="card service-card">
           <div class="service-media">
-            <img src="images/pdr06.png" alt="Pomoc s dokumentací pro pojišťovnu" loading="lazy" decoding="async">
+            <img src="images/pdr06.webp" alt="Pomoc s dokumentací pro pojišťovnu" loading="lazy" decoding="async">
           </div>
           <div class="service-body">
             <h3>Pomůžeme s dokumentací pro pojišťovnu</h3>
@@ -1195,7 +1191,7 @@
       <div class="video-gallery">
 
   <div class="video-card" data-label="Před → Po • blatník">
-    <video class="gallery-video" muted loop playsinline preload="metadata" data-preview="2.5">
+    <video class="gallery-video" muted loop playsinline preload="none" data-preview="2.5">
       <source data-src="videos/pdr-01.mp4" type="video/mp4">
     </video>
     <div class="hover-hint">Najeď myší</div>
@@ -1203,21 +1199,21 @@
   </div>
 
   <div class="video-card" data-label="Před → Po • dveře">
-    <video class="gallery-video" muted loop playsinline preload="metadata" data-preview="2.5">
+    <video class="gallery-video" muted loop playsinline preload="none" data-preview="2.5">
       <source data-src="videos/pdr-02.mp4" type="video/mp4">
     </video>
     <div class="hover-hint">Najeď myší</div>
     <div class="label">Před → Po • dveře</div>
   </div>
   <div class="video-card" data-label="Před → Po • krupobití">
-    <video class="gallery-video" muted loop playsinline preload="metadata" data-preview="2.5">
+    <video class="gallery-video" muted loop playsinline preload="none" data-preview="2.5">
       <source data-src="videos/pdr-04.mp4" type="video/mp4">
     </video>
     <div class="hover-hint">Najeď myší</div>
     <div class="label">Před → Po • krupobití</div>
   </div>
   <div class="video-card" data-label="Před → Po • blatník">
-    <video class="gallery-video" muted loop playsinline preload="metadata" data-preview="2.5">
+    <video class="gallery-video" muted loop playsinline preload="none" data-preview="2.5">
       <source data-src="videos/pdr-05.mp4" type="video/mp4">
     </video>
     <div class="hover-hint">Najeď myší</div>
@@ -1415,9 +1411,16 @@
     document.querySelectorAll(".gallery-video").forEach((video) => {
       const source = video.querySelector("source[data-src]");
       const previewTime = Number.parseFloat(video.dataset.preview || "2.5");
+      let previewBound = false;
+      const bindPreviewFrame = () => {
+        if (previewBound) return;
+        previewBound = true;
+        video.addEventListener("loadedmetadata", setPreviewFrame, { once: true });
+      };
       const ensureLoaded = () => {
         if (!source || source.src) return;
         source.src = source.dataset.src;
+        bindPreviewFrame();
         video.load();
       };
       const setPreviewFrame = () => {
@@ -1429,8 +1432,7 @@
         } catch (_) {}
         video.pause();
       };
-      ensureLoaded();
-      video.addEventListener("loadedmetadata", setPreviewFrame, { once: true });
+      bindPreviewFrame();
 
       const parentCard = video.closest(".video-card");
       if (!parentCard) return;
@@ -1461,6 +1463,17 @@
           video.pause();
         }
       });
+
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            ensureLoaded();
+            obs.unobserve(entry.target);
+          });
+        }, { rootMargin: "220px 0px" });
+        observer.observe(parentCard);
+      }
     });
 
     // Form -> mailto
